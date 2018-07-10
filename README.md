@@ -9,20 +9,16 @@ Classes of importance:
 1) GravityGunCharacter - Subclasses from Unreal's Character class and is responsible for the first person movement, controls, camera and gameplay handling. Owns a pointer to a BaseWeapon, which represents the weapon the player is currently holding.
 Defines two functions:
 
-	a) OnPrimaryAction()
+	a) OnPrimaryAction() - Bound to left click/left trigger, calls ABaseWeapon::PrimaryWeaponAction
 
-	b) OnSecondaryAction()
-
-These functions are bound to left click/left trigger and right click/right trigger respectively, and are responsible for calling the underlying functions from the Weapon to respond to the inputs with their behavior
+	b) OnSecondaryAction() - Bound to right click/right trigger, calls ABaseWeapon::SecondaryWeaponAction
 
 2) BaseWeapon - Subclasses from Unreal's Actor class, and is the base class for all weapons that can be equipped by the GravityGunCharacter. 
-Defines two virtual functions:
+Defines two virtual functions that are meant to be implemented by the weapon subclasses based on their gameplay behavior needs.:
 
 	a) PrimaryWeaponAction()
 
 	b) SecondaryWeaponAction()
-
-these functions are meant to be implemented by the weapon subclasses based on their gameplay behavior needs.
 
 3) GravityGun - Subclasses from BaseWeapon, and implements the gravity gun behavior as follows:
 
