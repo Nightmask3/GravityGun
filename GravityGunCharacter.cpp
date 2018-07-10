@@ -1,5 +1,3 @@
-// Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
-
 #include "GravityGunCharacter.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
@@ -47,7 +45,6 @@ AGravityGunCharacter::AGravityGunCharacter()
 	Mesh1P->RelativeLocation = FVector(-0.5f, -4.4f, -155.7f);
 
 }
-
 
 void AGravityGunCharacter::PickupWeapon(ABaseWeapon * newWeapon)
 {
