@@ -24,11 +24,8 @@ Defines two virtual functions:
 
 these functions are meant to be implemented by the weapon subclasses based on their gameplay behavior needs.
 
-3) GravityGun - Subclasses from BaseWeapon, and implements the gravity gun behavior. 
+3) GravityGun - Subclasses from BaseWeapon, and implements the gravity gun behavior as follows:
 
-Gravity Gun Behavior:
+	a) PrimaryWeaponAction() - When left click is pressed, any item currently held by the gravity gun or the object in front of the player that is being targeted by the gravity gun will be launched forward with a strong impulse.
 
-	a) When right click is pressed, any item in range of the player that they are targeting, will be picked up and hovers in front of the player, and moves with them as they move. If right click is pressed again while an object is held, it is dropped gently.
-
-	b) When left click is pressed, any item currently held by the gravity gun or the object in front of the player that is being targeted by the gravity gun will be launched forward with a strong impulse.
-
+	b) SecondaryWeaponAction() - When right click is pressed, any item in range of the player that they are targeting, will be picked up and hovers in front of the player, and moves with them as they move. If right click is pressed again while an object is held, it is dropped gently.
