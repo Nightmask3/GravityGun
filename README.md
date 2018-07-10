@@ -1,6 +1,6 @@
 # Gravity Gun in Unreal 4
 
-![Gravity Gun](https://media.giphy.com/media/8qxePZGzKNiMXvhNm2/giphy.gif)
+![Gravity Gun](https://user-images.githubusercontent.com/13033542/42537659-5becae8c-844a-11e8-8c32-70813ef5d226.gif)
 
 An Unreal 4 project where I recreated the Gravity Gun from Half Life 2 using mostly C++ and some Blueprints (visual scripting)
 
