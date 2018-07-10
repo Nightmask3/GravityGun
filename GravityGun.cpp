@@ -11,10 +11,13 @@
 
 AGravityGun::AGravityGun()
 {
+	// Spawn physics handle component
 	PhysicsHandleComponent = CreateDefaultSubobject<UPhysicsHandleComponent>(TEXT("PhysicsHandleComponent"));
 
+	// Spawn spline mesh component
 	SplineMeshComponent = CreateDefaultSubobject<USplineMeshComponent>(TEXT("SplineMeshComponent"));
 	SplineMeshComponent->SetupAttachment(RootComponent);
+	// Switch off visibility until the gun is active
 	SplineMeshComponent->SetVisibility(false);
 
 	// Gravity Gun requires tick
@@ -44,14 +47,18 @@ void AGravityGun::TraceForObjectToGrab()
 			TArray<AActor *> actorsToIgnore;
 			FHitResult outHitResult;
 
+			// Check flag to see if we should draw debug of the traces
 			EDrawDebugTrace::Type drawDebugType = bShouldDebugTraces ? EDrawDebugTrace::Persistent : EDrawDebugTrace::None;
+			
+			// Do the actual trace
 			bBlockingHit = UKismetSystemLibrary::LineTraceSingleForObjects((UObject *)thisWorld, traceStartLocation, traceEndLocation, acceptedObjectTypes, false, actorsToIgnore, drawDebugType, outHitResult, true);
 
-			// If trace encountered an object, grab it
+			// If trace encountered an object
 			if (bBlockingHit)
 			{
 				// If the object was WorldDynamic and not simulating physics, set it to do so
 				outHitResult.Component->SetSimulatePhysics(true);
+				// Grab the object
 				PhysicsHandleComponent->GrabComponentAtLocation(outHitResult.Component.Get(), NAME_None, outHitResult.Actor->GetActorLocation() + HandleGrabOffset);
 				bIsGrabbing = true;
 				HandleLocation = outHitResult.Location;
@@ -67,8 +74,10 @@ void AGravityGun::ReleaseGrabbedObject()
 	this->EndGrabCleanup();
 
 	bIsGrabbing = false;
+	// Actually releases the grabbed object 
 	PhysicsHandleComponent->ReleaseComponent();
 	CurrentTargetObject = nullptr;
+	// Switch off hover meshes visibility when gun is inactive
 	SplineMeshComponent->SetVisibility(false);
 	if (HoverSphereComponent)
 	{
@@ -80,6 +89,7 @@ void AGravityGun::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// If hover mesh is specified, spawn it
 	if (HoverMesh)
 	{
 		UStaticMeshComponent * sphereComponent = NewObject<UStaticMeshComponent>(this, UStaticMeshComponent::StaticClass(), TEXT("HoverSphereComponent"));
@@ -88,6 +98,7 @@ void AGravityGun::BeginPlay()
 		sphereComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		HoverSphereComponent = sphereComponent;
 		HoverSphereComponent->SetWorldScale3D(FVector(3.0f));
+		// Switch off visibility of hover meshes until gun is active
 		HoverSphereComponent->SetVisibility(false);
 		if (HoverMeshMaterial)
 		{
@@ -129,6 +140,7 @@ void AGravityGun::Tick(float DeltaSeconds)
 			SplineMeshComponent->SetStartPosition(SplineMeshComponent->GetComponentTransform().InverseTransformPosition(WeaponMesh->GetSocketLocation(TEXT("Muzzle"))));
 			SplineMeshComponent->SetEndPosition(SplineMeshComponent->GetComponentTransform().InverseTransformPosition(CurrentTargetObject->GetActorLocation()));
 
+			// Set location so hover sphere moves with the currently grabbed object
 			HoverSphereComponent->SetVisibility(true);
 			HoverSphereComponent->SetWorldLocation(CurrentTargetObject->GetActorLocation());
 		}
