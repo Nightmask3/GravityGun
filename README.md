@@ -1,5 +1,7 @@
 # Gravity Gun in Unreal 4
 
+![Gravity Gun](https://nightmask3.files.wordpress.com/2018/07/giffy3.gif)
+
 An Unreal 4 project where I recreated the Gravity Gun from Half Life 2 using mostly C++ and some Blueprints (visual scripting)
 
 [Video Reference of the Gravity Gun](https://www.youtube.com/watch?v=T-eJRgJVCZs&feature=youtu.be&t=8m50s)
