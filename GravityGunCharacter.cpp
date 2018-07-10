@@ -71,6 +71,7 @@ void AGravityGunCharacter::DropWeapon()
 void AGravityGunCharacter::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
 {
 	FName PropertyName = (PropertyChangedEvent.Property != nullptr) ? PropertyChangedEvent.Property->GetFName() : NAME_None;
+	// If the weapon class to spawn is changed
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(AGravityGunCharacter, WeaponClass))
 	{
 		if (WeaponClass)

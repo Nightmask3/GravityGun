@@ -7,6 +7,7 @@
 class UInputComponent;
 class ABaseWeapon;
 
+/* Character class that ties together input, camera and collision for the player */
 UCLASS(config=Game)
 class AGravityGunCharacter : public ACharacter
 {
@@ -25,6 +26,7 @@ private:
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = Weapon)
 	ABaseWeapon * WeaponActor;
 
+	/* Points to any actor the player currently overlaps and is used to check if it can be picked up */
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = Collision)
 	AActor * CurrentlyOverlappedActor = nullptr;
 
@@ -50,12 +52,10 @@ private:
 
 	void DropWeapon();
 
-
 protected:
 #if WITH_EDITOR
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif
-
 	virtual void BeginPlay() override;
 
 	// Function called when collider begins overlaps with an object
@@ -86,7 +86,7 @@ protected:
 	/* Handles moving forward/backward */
 	void MoveForward(float Val);
 
-	/* Handles stafing movement, left and right */
+	/* Handles strafing movement, left and right */
 	void MoveRight(float Val);
 
 	/*

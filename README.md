@@ -27,3 +27,7 @@ Defines two virtual functions that are meant to be implemented by the weapon sub
 	a) PrimaryWeaponAction() - When left click is pressed, any item currently held by the gravity gun or the object in front of the player that is being targeted by the gravity gun will be launched forward with a strong impulse.
 
 	b) SecondaryWeaponAction() - When right click is pressed, any item in range of the player that they are targeting, will be picked up and hovers in front of the player, and moves with them as they move. If right click is pressed again while an object is held, it is dropped gently.
+
+The C++ classes are all constructed in such a way that they are meant to be subclassed by a Blueprint class in the editor, which allows the user to set properties that require quick changes like meshes, materials, particles, sounds etc through the editor and also avoid direct content references in C++. 
+This can be seen in the liberal use of the UPROPERTY() meta specifiers above the member variables of the class, this is how Unreal 4 allows properties to be exposed to the editor UI. 
+

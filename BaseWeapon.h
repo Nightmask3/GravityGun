@@ -7,6 +7,7 @@
 class USkeletalMeshComponent;
 class UParticleSystem;
 
+/* Base class of all weapon actors*/
 UCLASS(Abstract)
 class GRAVITYGUNPROJECT_API ABaseWeapon : public AActor
 {
