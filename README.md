@@ -1,3 +1,5 @@
+# Gravity Gun 
+
 An Unreal 4 project where I recreated the Gravity Gun from Half Life 2 using mostly C++ and some Blueprints (visual scripting)
 
 
@@ -6,7 +8,12 @@ Classes of importance:
 1) GravityGunCharacter - Subclasses from Unreal's Character class and is responsible for the first person movement, controls, camera and gameplay handling. Owns a pointer to a BaseWeapon, which represents the weapon the player is currently holding.
 
 2) BaseWeapon - Subclasses from Unreal's Actor class, and is the base class for all weapons that can be equipped by the GravityGunCharacter. 
-Defines two virtual functions PrimaryWeaponAction() and SecondaryWeaponAction() that are meant to be implemented by the weapon subclasses based on their gameplay behavior needs
+Defines two virtual functions:
+
+a) PrimaryWeaponAction()
+b) SecondaryWeaponAction()
+
+these functions are meant to be implemented by the weapon subclasses based on their gameplay behavior needs.
 
 3) GravityGun - Subclasses from BaseWeapon, and implements the gravity gun behavior. 
 
