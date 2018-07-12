@@ -185,6 +185,7 @@ void AGravityGun::PrimaryWeaponAction()
 
 	FTransform WeaponMuzzleTransform = WeaponMesh->GetSocketTransform(TEXT("Muzzle"), RTS_World);
 	// Try to spawn the particle if specified - Relies on weapon skeletal mesh having a socket called "Muzzle" created
+	if(PrimaryActionParticleSystem)
 	{
 		UParticleSystemComponent* beamParticle = UGameplayStatics::SpawnEmitterAtLocation(this->GetWorld(), PrimaryActionParticleSystem, WeaponMuzzleTransform, true);
 
@@ -230,6 +231,7 @@ void AGravityGun::SecondaryWeaponAction()
 	
 	FTransform WeaponMuzzleTransform = WeaponMesh->GetSocketTransform(TEXT("Muzzle"), RTS_World);
 	// Try to spawn the particle if specified - Relies on weapon skeletal mesh having a socket called "Muzzle" created
+	if(SecondaryActionParticleSystem)
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(this->GetWorld(), SecondaryActionParticleSystem, WeaponMuzzleTransform, true);
 	}
