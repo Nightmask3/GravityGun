@@ -155,6 +155,7 @@ void AGravityGun::OnWeaponDropped()
 
 void AGravityGun::PrimaryWeaponAction()
 {
+	
 	// If grabbing something currently apply force to grabbed item
 	if (bIsGrabbing)
 	{
@@ -163,7 +164,7 @@ void AGravityGun::PrimaryWeaponAction()
 		targetMesh = Cast<UPrimitiveComponent>(CurrentTargetObject->GetComponentByClass(UPrimitiveComponent::StaticClass()));
 		targetMesh->AddImpulse(TraceComponent->GetForwardVector() * PushForceMagnitude, NAME_None, true);
 
-		// Release the object 
+		// Release the object
 		this->ReleaseGrabbedObject();
 
 	}
@@ -171,20 +172,23 @@ void AGravityGun::PrimaryWeaponAction()
 	else
 	{
 		this->TraceForObjectToGrab();
-		// If an object was found, apply force and release it
+		// If an object was found
 		if (CurrentTargetObject)
 		{
+			// Apply force
 			UPrimitiveComponent * targetMesh = nullptr;
 			targetMesh = Cast<UPrimitiveComponent>(CurrentTargetObject->GetComponentByClass(UPrimitiveComponent::StaticClass()));
 			targetMesh->AddImpulse(TraceComponent->GetForwardVector() * PushForceMagnitude, NAME_None, true);
 
+			// Release the object
 			this->ReleaseGrabbedObject();
 		}
 
 	}
-
+	
+	// Relies on weapon skeletal mesh having a socket called "Muzzle" created
 	FTransform WeaponMuzzleTransform = WeaponMesh->GetSocketTransform(TEXT("Muzzle"), RTS_World);
-	// Try to spawn the particle if specified - Relies on weapon skeletal mesh having a socket called "Muzzle" created
+	// Try to spawn the particle if specified 
 	if(PrimaryActionParticleSystem)
 	{
 		UParticleSystemComponent* beamParticle = UGameplayStatics::SpawnEmitterAtLocation(this->GetWorld(), PrimaryActionParticleSystem, WeaponMuzzleTransform, true);
@@ -199,6 +203,7 @@ void AGravityGun::PrimaryWeaponAction()
 
 void AGravityGun::SecondaryWeaponAction()
 {
+	
 	// If not currently grabbing anything
 	if (bIsGrabbing == false)
 	{
@@ -229,8 +234,9 @@ void AGravityGun::SecondaryWeaponAction()
 		this->ReleaseGrabbedObject();
 	}
 	
+	// Relies on weapon skeletal mesh having a socket called "Muzzle" created
 	FTransform WeaponMuzzleTransform = WeaponMesh->GetSocketTransform(TEXT("Muzzle"), RTS_World);
-	// Try to spawn the particle if specified - Relies on weapon skeletal mesh having a socket called "Muzzle" created
+	// Try to spawn the particle if specified
 	if(SecondaryActionParticleSystem)
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(this->GetWorld(), SecondaryActionParticleSystem, WeaponMuzzleTransform, true);
